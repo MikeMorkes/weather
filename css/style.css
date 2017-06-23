@@ -1,0 +1,62 @@
+@import url(https://fonts.googleapis.com/css?family=Oxygen:400,700);
+
+input:focus,I 
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+body {
+  background: #84b0d7 url('http://www.mikemorkes.com/codepen/weather/sunny.jpg');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  text-align: center;
+  color: #fff;
+  font-family: 'Oxygen', sans-serif;
+  padding-top: 20px;
+}
+
+#box {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px 20px 35px;
+  width: 90%;
+  max-width: 600px;
+  float: middle;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 15px;
+}
+
+.dropshadow {
+  text-shadow: 0 0 4px #000000;
+}
+
+.city {
+  font-size: 34px;
+  margin-top: 50px;
+}
+
+.temp {
+  font-size: 100px;
+  font-weight: bold;
+  margin-top: -20px;
+}
+
+.weather {
+  font-size: 40px;
+  margin-top: -25px;
+}
+
+#imperial {
+  display: none;
+  color: #333;
+  margin-top: 20px;
+}
+
+#metric {
+  color: #333;
+  margin-top: 20px;  
+}
