@@ -2,6 +2,7 @@ $(window).load(function() {
 
   var cTemp;
   var fTemp;
+  var weatherIconType;
 
   //get the appropriate background image
   function backgroundImage(weather) {
@@ -20,7 +21,9 @@ $(window).load(function() {
       case "partly cloudy":
       case "scattered clouds":        
       case "overcast":
-      case "hazy":
+      case "haze":
+      case "clouds":
+      case "broken clouds":
         return "http://www.mikemorkes.com/codepen/weather/cloudy.jpg";
         
 
@@ -67,24 +70,27 @@ $(window).load(function() {
     $.ajax({
       type: 'GET',
       asynch: false,
-      url: "https://api.wunderground.com/api/0826b7a9293c0565/conditions/q/" + lat + "," + lon + ".json",
+      url: "https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lon,
       contentType: "application/json",
       dataType: "jsonp",
       //success function
       success: function(response) {
         //store user location
-        var userLocation = response.current_observation.display_location.city;
-        //store temperature in fahrenheit
-        fTemp = Math.round(response.current_observation.temp_f);
+        var userLocation = response.name;
         //store temperature in celcius
-        cTemp = Math.round(response.current_observation.temp_c);
+        cTemp = Math.round(response.main.temp);        
+        //store temperature in fahrenheit
+        fTemp = cTemp * (9/5) + 32;
         //store weather description
-        var weather = response.current_observation.weather;
+        var weather = response.weather[0].main;
+        //store weather icon
+        weatherIconType = response.weather[0].icon;
+        console.log(weatherIconType);
 
         //Update inner html with response data
         city.innerHTML = userLocation;
-        temperature.innerHTML = fTemp + "&#8457;";
-        weatherDesc.innerHTML = weather;
+        temperature.innerHTML = fTemp + "&deg;F";
+        weatherDesc.innerHTML = "<img src='" + weatherIconType + "' width='40px' height='40px'>&nbsp;" + weather;
         $("body").css("background-image", "url(" + backgroundImage(weather) + ")");
       }
     })
@@ -96,7 +102,7 @@ $(window).load(function() {
 
     evt.preventDefault();
 
-    temperature.innerHTML = cTemp + "&#8451;";
+    temperature.innerHTML = cTemp + "&deg;C";
 
     document.getElementById("metric").style.display = "none";
     document.getElementById("imperial").style.display = "block";
@@ -107,7 +113,7 @@ $(window).load(function() {
 
     evt.preventDefault();
 
-    temperature.innerHTML = fTemp + "&#8457;";
+    temperature.innerHTML = fTemp + "&deg;F";
 
     document.getElementById("metric").style.display = "block";
     document.getElementById("imperial").style.display = "none";
