@@ -8,7 +8,7 @@ button:focus {
 }
 
 body {
-  background: #84b0d7 url('http://www.mikemorkes.com/codepen/weather/sunny.jpg');
+  background: #84b0d7 url('../img/sunny.jpg');
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: cover;
