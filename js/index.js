@@ -13,7 +13,7 @@ $(window).load(function() {
       case "partly sunny":
       case "clear skies":
       case "clear":
-        return "http://www.mikemorkes.com/codepen/weather/sunny.jpg";        
+        return "../weather/img/sunny.jpg";        
         
         
       //clouds
@@ -24,13 +24,13 @@ $(window).load(function() {
       case "haze":
       case "clouds":
       case "broken clouds":
-        return "http://www.mikemorkes.com/codepen/weather/cloudy.jpg";
+        return "../weather/img/cloudy.jpg";
         
 
       // rain
       case "rain":
       case "chance of rain":
-        return "http://www.mikemorkes.com/codepen/weather/rainy.jpg";        
+        return "../weather/img/rainy.jpg";        
 
         
         //snow
@@ -39,13 +39,13 @@ $(window).load(function() {
       case "chance of snow":
       case "sleet":
       case "chance of sleet":
-        return "http://www.mikemorkes.com/codepen/weather/snowing.jpg";
+        return "../weather/img/snowing.jpg";
         
 
         // extreme
       case "funnel cloud":
       case "squalls":
-        return "http://www.mikemorkes.com/codepen/weather/extreme.jpg";
+        return "../weather/img/extreme.jpg";
     }
   }
 
@@ -90,7 +90,12 @@ $(window).load(function() {
         //Update inner html with response data
         city.innerHTML = userLocation;
         temperature.innerHTML = fTemp + "&deg;F";
-        weatherDesc.innerHTML = "<img src='" + weatherIconType + "' width='40px' height='40px'>&nbsp;" + weather;
+        if (weatherIconType == undefined) {
+          weatherDesc.innerHTML = weather;
+        } else {
+          weatherDesc.innerHTML = "<img src='" + weatherIconType + "' width='40px' height='40px'>&nbsp;" + weather;
+        };
+        
         $("body").css("background-image", "url(" + backgroundImage(weather) + ")");
       }
     })
